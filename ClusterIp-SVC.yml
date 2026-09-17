@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: javawebapp
+  namespace: prod123
+  labels:
+    env: prod
+    app: frontend 
+spec:
+  containers:
+  - name: nginx
+    image: saidockerrepo/mavenwebapp:1.0.1
+    ports: 
+    - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webappservice
+  namespace: prod123
+  labels:
+    name: websvc
+spec: 
+  type: ClusterIP
+  selector:
+    env: prod
+    app: frontend
+  ports:
+    - port: 80
+      targetPort: 8080 
