@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: java-webapp-rc
+  namespace: prod123
+  labels:
+    app: java-webapp
+spec:
+  replicas: 3
+  selector:
+    app: java-webapp
+  template:
+    metadata:
+      labels:
+        app: java-webapp
+    spec:
+      containers:
+        - name: java-webapp
+          image: saidockerrepo/mavenwebapp:1.0.1
+          ports:
+            - containerPort: 8080
